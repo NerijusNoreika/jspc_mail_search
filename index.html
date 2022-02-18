@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jūrininkų SPC paštai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="img/social-medial-jspc-logo-42x42.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <div
+                class="min-w-screen min-h-screen bg-gray-100 flex justify-center bg-gray-100 font-sans overflow-hidden">
+                <div id="cont" class="sm:p-5 md:p-5 w-full lg:w-4/5">
+
+                    <div class="shadow flex my-12">
+                        <input @input="filter($event);"
+                            class="w-full rounded p-4 outline-none" type="text"
+                            placeholder="Ieškoti darbuotojo pagal paštą, vardą ar specialybę...">
+                    </div>
+
+                    <div class="overflow-x-auto bg-white shadow-md rounded my-6">
+                        <table class=" sm:p-5 w-full table-auto">
+                            <thead>
+                                <tr id="header"
+                                    class="sm:text-left md:text-center  sm:table-row bg-gray-200 text-gray-600 uppercase text-lg leading-normal">
+                                    <th class="py-3 px-6">Numeris</th>
+                                    <th @click="sort('profession')" class="cursor-pointer py-3 px-6 cursor-pointer">Specialybė <i class="ml-1 text-md fas fa-sort"></i></th>
+                                    <th @click="sort('name')"class="py-3 px-6 cursor-pointer">Vardas<i class="ml-1 text-md fas fa-sort"></i> </th>
+                                    <th @click="sort('surname')" class="py-3 px-6 cursor-pointer">Pavardė <i class="ml-1 text-md fas fa-sort"></i></th>
+                                    <th @click="sort"class="py-3 px-6">Paštas</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-md font-light">
+                                <tr v-for="(worker, index) in filteredWorkers"
+                                    class="border-b border-gray-200 hover:bg-gray-100">
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                                        <div class="text-center">
+                                            <div class="mr-2">
+                                                <span class="text-center">{{ index + 1 }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                                        <div class="text-center">
+                                            <div class="mr-2">
+                                                <span class="text-center">{{ worker.profession }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-6 text-left">
+                                        <div class="text-center">
+                                            <span class="text-center">{{ worker.name}}</span>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <span class="text-center">{{ worker.surname}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <div class="flex item-center justify-center">
+                                            <span class="text-center "><a title="Atidaryti pašto programoje"
+                                                    class=" hover:underline hover:font-medium"
+                                                    :href="'mailto:' + worker.mail"> {{ worker.mail }}</a><i
+                                                    @click="copyText(worker.mail, $event);" title="Kopijuoti pašto adresą"
+                                                    class="relative text-sm ml-1 cursor-pointer text-gray-500 font-light fas fa-copy">
+                                                </i></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
+    <script src="js/vue.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
